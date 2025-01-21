@@ -1,15 +1,19 @@
 /* GENERAL */
-
+html {
+    height: 100%;
+    width: 100%;
+}
 * {
     margin: 0;
     padding: 0;
     font-family: rockwell;
+    /* background-color: bisque; */
 }
 
 /* HEADER */
 
 header {
-    background-color: bisque;
+    background-color: rgb(249, 214, 172);
     display: flex;
     flex-direction: row;
     position:sticky
@@ -17,13 +21,14 @@ header {
 header img{
     height: 3em;
     width: auto;
+    margin-left: 1vh
 }
 
 #myLinks {
     display: none;
 }
 
-a {
+header a {
     color: rgb(2, 2, 2);
     padding: 14px 16px;
     text-decoration: none;
@@ -31,7 +36,7 @@ a {
     display: block;
     font-weight: bold;
 }
-a:hover {
+header a:hover {
     background-color: #90b083;
     transform: scale(1.1);
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
@@ -44,13 +49,64 @@ a.icon {
     top: 0;
   }
 
-footer
-{
+/* MAIN */
+main {
+    background-color: #90b083;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2vh;
 }
 
-/* BODY */
+main img {
+    height: 40vh;
+    width: 60vh;
+    margin:2vh;
+
+}
+main div {
+    margin-top: 2vh;
+    background-color: #75906b;
+    border-radius: 10px;
+}
+main p{
+    margin: 1vh;
+}
+/* FOOTER */
+
+footer {
+    margin-top: 5vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(249, 214, 172);
+}
+
+footer img{
+    margin-top: 1vh;
+    height: 13vh;
+    width: 13vh;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1vh;
+}
+footer nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+footer a {
+    margin-top: 1vh;
+    text-decoration: none;
+    color: #75906b;
+}
+
+footer p {
+    color:gray;
+}
 
 
 /* PC */
@@ -66,11 +122,21 @@ footer
         width: 100%;
         justify-content: flex-end;
     }
-    nav {
+    header nav {
         width: 100%;
     }
 
     a.icon {
         display: none;
     }
+
+    footer nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+body{
+    background-color: #dac29a;
 }
