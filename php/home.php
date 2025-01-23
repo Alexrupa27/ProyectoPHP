@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <img src="./icon.png" alt="Logo PistaChad">
+        <img src="../assets/icon.png" alt="Logo PistaChad">
         <nav id="myLinks">
           <ul>
             <a href="#">Inicio</a>
@@ -21,12 +21,33 @@
             <i class="fa fa-bars"></i> <!--  libreria font awesome -->
           </a>
     </header>
+    <br>
     <main>
-        <p>SEXO</p>
+    <div>
+      <p>Una manita de pistachos illo</p>
+      <img src="../assets/pistachosIMG/manopistacho.jpg" alt="mano con pistachos">
+    </div>
+    <div>
+      <p>ai crese eso</p>
+      <img src="../assets/pistachosIMG/frutopistacho.jpg" alt="mano con pistachos">
+    </div>
+    <div>
+      <p>muixo pistaixo</p>
+      <img src="../assets/pistachosIMG/bolpistachos.png" alt="mano con pistachos">
+    </div>
     </main>
     <footer>
-        <p>&copy; 2025 PistaChad. Todos los derechos reservados.</p>
-    </footer>
+    <img src="../assets/pistachad.png" alt="Pistachad Logo" />
+    <nav>
+        <a href="./about">Acerca de</a> |
+        <a href="./privacy">Privacidad</a> |
+        <a href="./contact">Contacto</a>
+    </nav>
+    <p>&copy; 2025 PistaChad. Todos los derechos reservados.</p>
+    <p>Todas las marcas registradas mencionadas aquí son propiedad de sus respectivos dueños.</p>
+    <br>
+    </p>
+  </footer>
     <script src="../js/home.js"></script>
 </body>
 </html>
