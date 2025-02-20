@@ -35,8 +35,8 @@
                     $address = $email;
                     $mail->AddAddress($address, 'Test');
                     //Enviament
-                    
-                    $message= '
+                    $urlActivation = "http://localhost/PROYECTOPHP/mailcheckaccount.php?code=$activeCode&mail=$email";
+                    $message= "
                         <html>
                             <head>
                                 <title>Activación de cuenta</title>
@@ -82,17 +82,17 @@
                                 </style>
                             </head>
                             <body>
-                                <div class="container">
-                                    <div class="header">
+                                <div class='". container. "'>
+                                    <div class='" . header ."'>
                                         <h2>¡Bienvenido a Pisachad!</h2>
                                     </div>
                                         <p>Estamos emocionados de que te hayas registrado con nosotros. Para completar tu registro y activar tu cuenta, haz clic en el siguiente botón:</p>
-                                        <a href="https://tusitio.com/activar-cuenta" class="button">Activar Cuenta</a>
-                                        <p class="footer">Si no has realizado este registro, puedes ignorar este mensaje.</p>
+                                        <a href='" . $urlActivation . "' class='" . button ."'>Activar Cuenta</a>
+                                        <p class='" . footer . "'>Si no has realizado este registro, puedes ignorar este mensaje.</p>
                                     </div>
                             </body>
                             </html>
-                            ';
+                            ";
                             $mail->MsgHTML($message);
                     
                     try {
@@ -105,14 +105,17 @@
                             echo "El correo ya está registrado.";
                         } else {
                             // Insertar usuario en la base de datos
-                            $stmt = $db->prepare("INSERT INTO usuari (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active) 
-                            VALUES (:email, :username, :password, :name, :surname, now(), null, null, 0)");
+                            $activeCode = hash('sha256', rand(10000, 90000));
+
+                            $stmt = $db->prepare("INSERT INTO usuari (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active, activationDate, activationCode, resetPassExpiry, resetPassCode) 
+                            VALUES (:email, :username, :password, :name, :surname, now(), null, null, 0, null, :activeCode, null, null)");
                             $stmt->execute([
                                 ':email' => $email,
                                 ':username' => $username,
                                 ':password' => $password,
                                 ':name' => $name,
-                                ':surname' => $surname
+                                ':surname' => $surname,
+                                ':activeCode' => $activeCode
                             ]);
                             try{
                                 $mail->send();
