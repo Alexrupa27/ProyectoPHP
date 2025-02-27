@@ -20,21 +20,27 @@
         <?php
     require './db.php';
     session_start();
+    
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST["email"];
         $password = $_POST["password"];
 
         try {
-            $stmt = $db->prepare("SELECT idUser, username, passHash FROM usuari WHERE mail = ?");
+            $stmt = $db->prepare("SELECT idUser, username, passHash, active FROM usuari WHERE mail = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch();
 
             if ($user && password_verify($password, $user['passHash'])) {
-                $_SESSION["idUser"] = $user["idUser"];
-                $_SESSION["username"] = $user["username"];
-                header("Location: home.php"); // Redirigir al usuario autenticado
-                exit();
+                if ($user["active"]==1){
+                    $_SESSION["idUser"] = $user["idUser"];
+                    $_SESSION["username"] = $user["username"];
+                    header("Location: ./php/home.php"); // Redirigir al usuario autenticado
+                    $stmt = $db->prepare("UPDATE usuari SET lastSignIn = now() WHERE mail = ?");
+                    $stmt->execute([$email]);
+                    exit();
+                }
+                else{ echo "Usuario no activo.";}
             } else {
                 echo "Correo o contraseña incorrectos.";
             }
