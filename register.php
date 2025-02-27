@@ -1,4 +1,4 @@
-    <?php
+<?php
                 
                 require './db.php';
                 
@@ -27,7 +27,7 @@
                     $mail->Password = 'memv kjmn xjxe afbq';
                     //Dades del correu electrònic
                     $mail->SetFrom('alex.ruizp@educem.net','Pistachad');
-                    $mail->Subject = '¡Activa tu cuenta ahora!';
+                    $mail->Subject ="¡Activa tu cuenta ahora!";
                     
 
                     
@@ -35,7 +35,8 @@
                     $address = $email;
                     $mail->AddAddress($address, 'Test');
                     //Enviament
-                    $urlActivation = "http://localhost/PROYECTOPHP/mailcheckaccount.php?code=$activeCode&mail=$email";
+                    $activeCode = hash('sha256', rand(10000, 90000));
+                    $urlActivation = "http://localhost/Pistachad2/ProyectoPHP/mailcheckaccount.php?code=$activeCode&mail=$email";
                     $message= "
                         <html>
                             <head>
@@ -82,13 +83,13 @@
                                 </style>
                             </head>
                             <body>
-                                <div class='". container. "'>
-                                    <div class='" . header ."'>
+                                <div class='container'>
+                                    <div class='header'>
                                         <h2>¡Bienvenido a Pisachad!</h2>
                                     </div>
                                         <p>Estamos emocionados de que te hayas registrado con nosotros. Para completar tu registro y activar tu cuenta, haz clic en el siguiente botón:</p>
-                                        <a href='" . $urlActivation . "' class='" . button ."'>Activar Cuenta</a>
-                                        <p class='" . footer . "'>Si no has realizado este registro, puedes ignorar este mensaje.</p>
+                                        <a href='" . $urlActivation . "' class='button'>Activar Cuenta</a>
+                                        <p class='footer'>Si no has realizado este registro, puedes ignorar este mensaje.</p>
                                     </div>
                             </body>
                             </html>
@@ -105,7 +106,7 @@
                             echo "El correo ya está registrado.";
                         } else {
                             // Insertar usuario en la base de datos
-                            $activeCode = hash('sha256', rand(10000, 90000));
+                            
 
                             $stmt = $db->prepare("INSERT INTO usuari (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active, activationDate, activationCode, resetPassExpiry, resetPassCode) 
                             VALUES (:email, :username, :password, :name, :surname, now(), null, null, 0, null, :activeCode, null, null)");
@@ -124,7 +125,7 @@
                             catch (PDOException $e) {
                             echo "Hubo un error al enviar el correo. Mailer Error: {$mail->ErrorInfo}";
                             }
-                            //header("Location: ./Login.php"); // Redirigir al usuario autenticado
+                            header("Location: ./Login.php"); // Redirigir al usuario autenticado
                             exit();
                         }
                     } catch (PDOException $e) {
