@@ -12,6 +12,9 @@
                     $email = $_POST["email"];
                     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
                     
+                    // Insertar usuario en la base de datos
+                    $activeCode = hash('sha256', rand(10000, 90000));
+
                     $mail = new PHPMailer();
                     $mail->IsSMTP();
                     //Configuració del servidor de Correu
