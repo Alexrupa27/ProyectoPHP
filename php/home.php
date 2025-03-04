@@ -1,3 +1,15 @@
+<?php
+//iniciar SESSION
+  session_start();
+
+  //comprobar si el usuario no tiene SESSION activa
+  if (!isset($_SESSION['username'])) {
+    //Redirigir al index si no hay SESSION
+    header('Location: ../Login.php');
+    exit();
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,7 +26,7 @@
           <ul>
             <a href="#">Inicio</a>
             <a href="#">Ver novedades</a>
-            <a href="#">Desconectar</a>
+            <a href="../Disconnect.php">Desconectar</a>
           </ul>
         </nav>
         <a href="javascript:void(0);" class="icon" onclick="hamburgesa()">
@@ -51,3 +63,4 @@
     <script src="../js/home.js"></script>
 </body>
 </html>
+
