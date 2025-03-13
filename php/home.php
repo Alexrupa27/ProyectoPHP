@@ -18,6 +18,7 @@
     <title>PistaChad</title>
     <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -25,7 +26,7 @@
         <nav id="myLinks">
           <ul>
             <a href="#">Inicio</a>
-            <a href="#">Ver novedades</a>
+            <a href="./perfil.php">Perfil</a>
             <a href="../Disconnect.php">Desconectar</a>
           </ul>
         </nav>
