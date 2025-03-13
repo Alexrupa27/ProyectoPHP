@@ -1,170 +1,144 @@
+
+/* --- ESTILOS GENERALES --- */
 * {
-    font-family: 'Rockwell', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: rockwell;
+    
+}
+html {
+    height: 100%;
+    width: 100%;
+    background-color:  rgb(249, 214, 172);
 }
 
 body {
-    
-    background-color: rgb(249, 214, 172);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-    opacity: 0.99;
-    @media (max-width: 769px){
-        background-color: #d9c5a2;
-    }
-
-}
-
-article {
-    width: 100%;
-    height: auto;
-}
-header{
     display: flex;
+    flex-direction: column;
     align-items: center;
-    
-}
-header img.logo{
-    height: 100px;
-    width: 100px;
+    justify-content: center;
+    height: 100vh;
 }
 
-form{
-    display: grid;
-    background-color: #d9c5a2;
-    margin-top: 0;
-    margin-bottom: 0;
-    /* background: linear-gradient(#154602, rgb(7, 130, 3), rgb(0, 255, 132)); */
-    padding: 0 10%;
-    border-radius: 3px;
-    width: 240px;
-    justify-items: center;
-    @media (max-width: 769px){
-        width: 100%;
-        height: 100%;
-        margin: 0;  
+/* --- HEADER --- */
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+.pistaBackground {
+    width: 10em;
+    height: 10em;
+}
+
+.titulo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #5a3d2b;
+}
+
+/* --- FORMULARIO --- */
+form {
+    background: #90b083;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* --- ANIMACIÓN DE ENTRADA --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
-
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h1 {
-    text-align: center;
-    font-size: 2.1rem;
+    font-size: 1.8rem;
+    color: #5a3d2b;
+    margin-bottom: 20px;
 }
 
-
-
 input {
-    padding: 15px 10px;
-    margin: 5px 0px;
     width: 100%;
-    color: #666;
-    border-radius: 1px;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
     border: 1px solid #ccc;
+    font-size: 1rem;
 }
 
 button[type="submit"] {
-    text-align: center;
-    background-color: #90b083;
-    padding: 8px 13px;
-    margin: 10px -22px;
+    background-color: #5a3d2b;
     color: white;
-    border-radius: 3px;
-    border: none;
     font-size: 1.2rem;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-   float: right;
+    transition: 0.3s;
 }
 
 button[type="submit"]:hover {
-    background-color: #57A639;
+    background-color: #402a1d;
 }
 
-button[type="reset"] {
-    float: right;
-    background-color: #FFA420;
-    padding: 8px 13px;
-    color: white;
-    border-radius: 3px;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
-button[type="reset"]:hover {
-    background-color: #FF7514;
-}
-
+/* --- LINKS --- */
 p {
-    text-align: center;
-    font-size: 1.2rem;
-    color: rgba(26, 24, 24, 0.692);
+    font-size: 1rem;
+    color: #5a3d2b;
+    margin-top: 15px;
 }
 
 a {
-    color: rgba(7, 7, 248, 0.562);
-    cursor: pointer;
-    font-size: 1.1rem;
+    color: #d35400;
     text-decoration: none;
+    font-weight: bold;
 }
 
 a:hover {
-    color: rgba(11, 11, 190, 0.562);
+    text-decoration: underline;
 }
 
-a:focus {
-    color: rgba(3, 3, 85, 0.466);
+/* --- LOGO --- */
+#pistachadlogo {
+    width: 120px;
+    height: auto;
+    margin-top: 20px;
+    transition: transform 0.3s ease-in-out;
 }
 
-p.copy{
-    display: grid;
-    
-    margin-top: 10%;
-    margin-bottom: 0;
-    justify-items: center;
-    
-    /* background: linear-gradient(#154602, rgb(7, 130, 3), rgb(0, 255, 132)); */
-    border-radius: 3px;
-    @media (max-width: 769px){
-        width: 100%;
-        height: 100%;
-        margin-top: 10%; 
-        padding: 0 10%;
-
-    }
-}
-img.pistachad{
-    height: 400px;
-    width: 400px;
-    float: right;
-    margin-top: -450px;
-    margin-right: 10%;
-    @media (max-width: 900px){
-        
-        opacity: 0; 
-    }
-}
-   
-p.titulo{
-    font-family: 'Comic-sans', sans-serif;
-    margin-left: 2%;
-    padding: 0;
-    box-sizing: border-box;
-    font-size: 3.5vh;
-    font-weight: bold;
-}
-.register{
-    margin: 20px 31vw;
-}
-.pistaRegister{
-    justify-self: start;
-    margin-left: -50%;
-    margin-top: 10px;
+#pistachadlogo:hover {
+    transform: scale(1.1);
 }
 
-
-.alreadyAccount{
+/* --- FOOTER --- */
+footer {
     text-align: center;
-    display: grid;
+    margin-top: 30px;
+    color: #5a3d2b;
+    font-size: 0.9rem;
 }
 
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 600px) {
+    body {
+        height: auto;
+        padding: 20px;
+    }
+
+    form {
+        width: 100%;
+        max-width: 350px;
+    }
+}
