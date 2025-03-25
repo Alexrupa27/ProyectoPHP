@@ -16,7 +16,7 @@
                     $mail->IsSMTP();
                     //Configuració del servidor de Correu
                     //Modificar a 0 per eliminar msg error
-                    $mail->SMTPDebug = 2;
+                    $mail->SMTPDebug = 0;
                     $mail->SMTPAuth = true;
                     $mail->SMTPSecure = 'tls';
                     $mail->Host = 'smtp.gmail.com';
@@ -121,8 +121,8 @@
                             ]);
                             try{
                                 $mail->send();
-                                echo 'El correo ha sido enviado exitosamente.';     
-                            }
+                                header("Location: ./Login.php");
+                                exit();                            }
                             catch (PDOException $e) {
                             echo "Hubo un error al enviar el correo. Mailer Error: {$mail->ErrorInfo}";
                             }
