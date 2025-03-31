@@ -31,11 +31,18 @@
           </ul>
         </nav>
         <a href="javascript:void(0);" class="icon" onclick="hamburgesa()">
-            <i class="fa fa-bars"></i> <!--  libreria font awesome -->
+            <i class="fa fa-bars"></i>
           </a>
     </header>
     <br>
     <main>
+    <div class="post-container">
+      <form action="upload_post.php" method="POST" enctype="multipart/form-data">
+        <textarea name="post_content" placeholder="¿Qué estás pensando?" rows="4" required></textarea>
+        <input type="file" name="post_image" accept="image/*">
+        <button type="submit">Publicar</button>
+      </form>
+    </div>
     <div>
       <p>Una manita de pistachos illo</p>
       <img src="../assets/pistachosIMG/manopistacho.jpg" alt="mano con pistachos">
@@ -59,9 +66,7 @@
     <p>&copy; 2025 PistaChad. Todos los derechos reservados.</p>
     <p>Todas las marcas registradas mencionadas aquí son propiedad de sus respectivos dueños.</p>
     <br>
-    </p>
   </footer>
     <script src="../js/home.js"></script>
 </body>
 </html>
-

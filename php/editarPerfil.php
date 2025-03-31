@@ -6,12 +6,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modificar Perfil</title>
-  <link rel="stylesheet" href="../css/editarPerfil.css">
+  <!-- <link rel="stylesheet" href="../css/editarPerfil.css"> -->
+  <link rel="stylesheet" href="../css/header.css">
   <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
+<header>
+        <img src="../assets/icon.png" alt="Logo PistaChad">
+        <nav id="myLinks">
+          <ul>
+            <a href="#">Inicio</a>
+            <a href="./perfil.php">Perfil</a>
+            <a href="../Disconnect.php">Desconectar</a>
+          </ul>
+        </nav>
+        <a href="javascript:void(0);" class="icon" onclick="hamburgesa()">
+            <i class="fa fa-bars"></i> <!--  libreria font awesome -->
+          </a>
+    </header>
+    <main>
   <div class="container">
     <h1>Modificar Perfil</h1>
     <form action="#" method="post" class="profile-form">
@@ -40,6 +54,6 @@
       </div>
     </form>
   </div>
-
+</main> 
 </body>
 </html>
