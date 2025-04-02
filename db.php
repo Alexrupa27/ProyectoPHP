@@ -10,9 +10,6 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC // Modo de fetch por defecto
     ]);
 
-    if ($db != null) {
-        echo 'Connexió establerta!<br>';
-    }
 
 } catch (PDOException $e) {
     echo 'Error amb la BDs: ' . $e->getMessage() . '<br>';

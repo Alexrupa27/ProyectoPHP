@@ -1,8 +1,4 @@
 function hamburgesa() {
-    var x = document.getElementById("myLinks");
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    } else {
-      x.style.display = "block";
-    }
-  }
+  const menu = document.querySelector("#myLinks ul");
+  menu.classList.toggle("show");
+}

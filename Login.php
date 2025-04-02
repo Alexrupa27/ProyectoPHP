@@ -39,7 +39,6 @@
         <img src="./img/logo.png" alt="Background de la web" class="pistaBackground">
         <p class="titulo">PISTACHAD</p>
     </header>
-    php
 
 <?php
 require './db.php';

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modificar Perfil</title>
   <!-- <link rel="stylesheet" href="../css/editarPerfil.css"> -->
-  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/editarPerfil.css">
   <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -16,7 +16,7 @@
         <img src="../assets/icon.png" alt="Logo PistaChad">
         <nav id="myLinks">
           <ul>
-            <a href="#">Inicio</a>
+            <a href="./home.php">Inicio</a>
             <a href="./perfil.php">Perfil</a>
             <a href="../Disconnect.php">Desconectar</a>
           </ul>
@@ -55,5 +55,16 @@
     </form>
   </div>
 </main> 
+<footer>
+    <img src="../assets/pistachad.png" alt="Pistachad Logo" />
+    <nav>
+        <a href="./about">Acerca de</a> |
+        <a href="./privacy">Privacidad</a> |
+        <a href="./contact">Contacto</a>
+    </nav>
+    <p>&copy; 2025 PistaChad. Todos los derechos reservados.</p>
+    <p>Todas las marcas registradas mencionadas aquí son propiedad de sus respectivos dueños.</p>
+    <br>
+  </footer>
 </body>
 </html>
