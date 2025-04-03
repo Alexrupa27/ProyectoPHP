@@ -21,6 +21,8 @@
                     $mail->SMTPSecure = 'tls';
                     $mail->Host = 'smtp.gmail.com';
                     $mail->Port = 587;
+                    $mail->CharSet = "UTF-8"; 
+                    $mail->Encoding = 'base64';
                     
                     //Credencials del compte GMAIL
                     $mail->Username = 'alex.ruizp@educem.net';
@@ -36,7 +38,7 @@
                     $mail->AddAddress($address, 'Test');
                     //Enviament
                     $activeCode = hash('sha256', rand(10000, 90000));
-                    $urlActivation = "http://localhost/Pistachad2/ProyectoPHP/mailcheckaccount.php?code=$activeCode&mail=$email";
+                    $urlActivation = "http://localhost/ProyectoPHP/mailcheckaccount.php?code=$activeCode&mail=$email";
                     $message= "
                         <html>
                             <head>
@@ -100,14 +102,10 @@
                         // Verificar que el correo no esté registrado
                         $checkEmail = $db->prepare("SELECT * FROM usuari WHERE mail = :email");
                         $checkEmail->execute([':email' => $email]);
-                        echo "Ha ejecutado";
                         if ($checkEmail->rowCount() > 0) {
-                            echo "Ha encontrado correo";
                             echo "El correo ya está registrado.";
                         } else {
                             // Insertar usuario en la base de datos
-                            $activeCode = hash('sha256', rand(10000, 90000));
-
 
                             $stmt = $db->prepare("INSERT INTO usuari (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active, activationDate, activationCode, resetPassExpiry, resetPassCode) 
                             VALUES (:email, :username, :password, :name, :surname, now(), null, null, 0, null, :activeCode, null, null)");

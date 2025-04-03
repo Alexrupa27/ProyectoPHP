@@ -246,31 +246,254 @@ footer p {
     font-size: 0.9rem;
 }
 
+/* Añade esto a tu archivo home.css o perfil.css */
+
 .likeButton {
-    background-color: #f0d9b5;
-    color: #d9534f;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 15px;
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-}
-
-.likeButton i {
-    color: #d9534f;
-    transition: color 0.3s;
+    gap: 5px;
 }
 
 .likeButton:hover {
-    background-color: #d9534f;
+    background-color: #f8f8f8;
+}
+
+.likeButton.active {
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.likeButton.active i {
+    color: #e74c3c;
+}
+
+.postActions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.postDate {
+    font-size: 0.8em;
+    color: #777;
+    margin: 0;
+}
+/* FILTROS */
+.filtros {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    width: 100%;
+    max-width: 500px;
+}
+
+.filtro-btn {
+    background-color: rgba(249, 214, 172, 0.8);
+    color: #75906b;
+    padding: 0.8rem 1.5rem;
+    border: 2px solid #75906b;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.filtro-btn:hover {
+    background-color: #90b083;
     color: white;
     transform: scale(1.05);
 }
 
-.likeButton:hover i {
+.filtro-btn.active {
+    background-color: #75906b;
     color: white;
+}
+
+
+/* Make filters responsive */
+@media (max-width: 768px) {
+    .filtros {
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+    }
+    
+    .filtro-btn {
+        width: 100%;
+    }
+}
+.combobox-container {
+    margin: 1rem 0;
+    text-align: left;
+    font-size: 1rem;
+    color: #75906b;
+}
+
+.styled-combobox {
+    padding: 0.5rem;
+    border: 2px solid #75906b;
+    border-radius: 10px;
+    background-color: rgba(249, 214, 172, 0.8);
+    color: #75906b;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.styled-combobox:focus {
+    border-color: #90b083;
+    outline: none;
+    box-shadow: 0 0 5px rgba(144, 176, 131, 0.5);
+}
+
+/* Mantener la apariencia nativa pero eliminar el subrayado */
+/* Mantener la apariencia nativa pero eliminar el subrayado */
+/* Aplicar reglas más específicas y agresivas */
+select.styled-combobox,
+select.styled-combobox:hover,
+select.styled-combobox:focus,
+select.styled-combobox:active {
+    text-decoration: none !important;
+    color: #75906b !important; /* Forzar el color del texto incluso en hover */
+}
+
+/* Eliminar cualquier cambio de color en los elementos internos */
+select.styled-combobox *,
+select.styled-combobox option,
+select.styled-combobox option:hover {
+    color: #75906b !important;
+    text-decoration: none !important;
+}
+
+/* Resetear estilos específicos de navegador */
+select.styled-combobox::-ms-expand {
+    display: inline-block; /* Mantener la flecha en IE/Edge */
+}
+
+/* Resetear el color de texto para todos los estados */
+.styled-combobox::selection {
+    color: #75906b !important;
+}
+
+/* Estilos para la sección de comentarios */
+.commentSection {
+    margin-top: 10px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.existingComments {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.comment {
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.commentHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.commentProfilePic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.commentUserName {
+    font-weight: bold;
+    margin: 0;
+    font-size: 14px;
+}
+
+.commentDate {
+    font-size: 12px;
+    color: #777;
+    margin: 0;
+}
+
+.commentContent {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+}
+
+.noComments {
+    font-style: italic;
+    color: #777;
+    text-align: center;
+    padding: 10px;
+}
+
+.commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.commentForm textarea {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.commentForm button {
+    align-self: flex-end;
+    background-color: #4a8f5c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.commentForm button:hover {
+    background-color: #3a7a4c;
+}
+
+.commentToggle {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.commentToggle:hover {
+    color: #4a8f5c;
+}
+
+.commentToggle i {
+    font-size: 16px;
+}
+
+/* Adaptar los botones de acciones de publicación */
+.postActions {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
 }

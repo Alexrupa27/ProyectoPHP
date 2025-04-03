@@ -16,6 +16,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recoger el contenido del post
     $post_content = filter_input(INPUT_POST, 'post_content', FILTER_SANITIZE_STRING);
     
+    // Recoger la categoría seleccionada
+    $categoria = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRING);
+    
+    // Validar que la categoría sea válida
+    $categorias_validas = ['sin_filtro', 'fruto', 'arbol'];
+    if (!in_array($categoria, $categorias_validas)) {
+        $categoria = 'sin_filtro'; // Valor por defecto si no es válida
+    }
+    
     // Obtener email del usuario desde la sesión
     // Primero necesitamos obtener el email asociado al username
     $username = $_SESSION["username"];
@@ -67,12 +76,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         // Preparar la consulta SQL según si hay imagen o no
         if ($tiene_imagen) {
-            $stmt = $db->prepare("INSERT INTO publicacio (dataPublicacio, fotoPublicacio, contingut, likesPubli, dislikesPubli, mail) 
-                                VALUES (:fecha, :foto, :contenido, :likes, :dislikes, :email)");
+            $stmt = $db->prepare("INSERT INTO publicacio (dataPublicacio, fotoPublicacio, contingut, likesPubli, dislikesPubli, mail, categoria) 
+                                VALUES (:fecha, :foto, :contenido, :likes, :dislikes, :email, :categoria)");
             $stmt->bindParam(':foto', $foto_publicacion, PDO::PARAM_LOB);
         } else {
-            $stmt = $db->prepare("INSERT INTO publicacio (dataPublicacio, contingut, likesPubli, dislikesPubli, mail) 
-                                VALUES (:fecha, :contenido, :likes, :dislikes, :email)");
+            $stmt = $db->prepare("INSERT INTO publicacio (dataPublicacio, contingut, likesPubli, dislikesPubli, mail, categoria) 
+                                VALUES (:fecha, :contenido, :likes, :dislikes, :email, :categoria)");
         }
         
         // Vincular parámetros comunes
@@ -81,6 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':likes', $likes, PDO::PARAM_INT);
         $stmt->bindParam(':dislikes', $dislikes, PDO::PARAM_INT);
         $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':categoria', $categoria);
         
         // Ejecutar la consulta
         $stmt->execute();

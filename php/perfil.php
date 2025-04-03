@@ -15,18 +15,33 @@ require '../db.php';
 $username = $_SESSION["username"];
 
 // Preparar la consulta para obtener los datos del usuario
-$stmt = $db->prepare('SELECT ubi, descripcio, edat, fotoPerfil FROM usuari WHERE username = ?');
+$stmt = $db->prepare('SELECT ubi, descripcio, edat, fotoPerfil, mail FROM usuari WHERE username = ?');
 $stmt->execute([$username]);
-$user = $stmt->fetch();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Cerrar la conexión a la base de datos
-$db = null;
+// Verificar si se encontró el usuario
+if (!$user) {
+    // Manejar el caso donde no se encontró el usuario
+    $user = ['ubi' => '', 'descripcio' => '', 'edat' => '', 'fotoPerfil' => null, 'mail' => ''];
+}
 
 // Procesar la imagen de perfil correctamente
-$fotoPerfil = '../assets/default-profile.png'; // Imagen por defecto
+$fotoPerfil = '../img/default.png'; // Imagen por defecto
+
 if (!empty($user['fotoPerfil'])) {
-    // Asegurar que la imagen está en formato base64
-    $fotoPerfil = 'data:image/jpeg;base64,' . base64_encode($user['fotoPerfil']);
+    // Comprobar si la imagen ya es una ruta
+    if (is_string($user['fotoPerfil']) && file_exists($user['fotoPerfil'])) {
+        // Es una ruta de archivo válida
+        $fotoPerfil = $user['fotoPerfil'];
+    } else {
+        // Podría ser datos binarios, intentar convertir a base64
+        try {
+            $fotoPerfil = 'data:image/jpeg;base64,' . base64_encode($user['fotoPerfil']);
+        } catch (Exception $e) {
+            // Si falla, usar la imagen por defecto
+            $fotoPerfil = '../img/default.png';
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -37,7 +52,7 @@ if (!empty($user['fotoPerfil'])) {
     <title>PistaChad</title>
     <link rel="stylesheet" href="../css/perfil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -57,15 +72,76 @@ if (!empty($user['fotoPerfil'])) {
     <main>
       <div class="profileContainer">
         <!-- Mostrar foto de perfil correctamente -->
-        <img src="<?php echo $fotoPerfil; ?>" alt="Foto de perfil">
-
+        <img src="<?php echo htmlspecialchars($fotoPerfil); ?>" alt="Foto de perfil">
+         
         <div class="profileInfo">
             <h1><?php echo htmlspecialchars($username); ?></h1>
-            <p><?php echo !empty($user['descripcio']) ? htmlspecialchars($user['descripcio']) : 'Sin descripción'; ?></p>
-            <p><strong>Ubicación:</strong> <?php echo !empty($user['ubi']) ? htmlspecialchars($user['ubi']) : 'No especificado'; ?></p>
             <p><strong>Edad:</strong> <?php echo !empty($user['edat']) ? htmlspecialchars($user['edat']) : 'No especificado'; ?></p>
+            <p><strong>Ubicación:</strong> <?php echo !empty($user['ubi']) ? htmlspecialchars($user['ubi']) : 'No especificado'; ?></p>
+            <p><?php echo !empty($user['descripcio']) ? htmlspecialchars($user['descripcio']) : 'Sin descripción'; ?></p>
         </div>
       </div>
+      
+      <?php
+      // Obtener las publicaciones del usuario actual
+      try {
+          // Usamos el email del usuario para buscar sus publicaciones
+          $userEmail = $user['mail'];
+          
+          // Solo mostramos publicaciones del usuario cuyo perfil estamos viendo
+          $sql = "SELECT id, dataPublicacio, fotoPublicacio, contingut, likesPubli, dislikesPubli, mail 
+                 FROM publicacio 
+                 WHERE mail = ?
+                 ORDER BY dataPublicacio DESC
+                 LIMIT 3";
+          
+          $postStmt = $db->prepare($sql);
+          $postStmt->execute([$userEmail]);
+          
+          if ($postStmt->rowCount() > 0) {
+              while($row = $postStmt->fetch(PDO::FETCH_ASSOC)) {
+                  // Formatear fecha
+                  $fecha = date('d/m/Y H:i', strtotime($row["dataPublicacio"]));
+                  
+                  // Inicializar variable para la imagen de la publicación
+                  $fotoPublicacion = "";
+                  
+                  // Verificar si hay una imagen en la publicación y procesarla correctamente
+                  if (!empty($row["fotoPublicacio"])) {
+                      try {
+                          $fotoPublicacion = '<img src="data:image/jpeg;base64,' . base64_encode($row["fotoPublicacio"]) . '" alt="Imagen de publicación" class="postImage">';
+                      } catch (Exception $e) {
+                          // Si hay un error al procesar la imagen, no mostramos nada
+                          $fotoPublicacion = '<p class="error-message">Error al cargar la imagen</p>';
+                      }
+                  }
+                  
+                  // Mostrar publicación con la foto del autor
+                  echo '<div class="socialPost">
+                          <div class="postHeader">
+                              <img src="' . htmlspecialchars($fotoPerfil) . '" alt="Foto de perfil" class="profilePic">
+                              <div>
+                                  <p class="userName">' . htmlspecialchars($username) . '</p>
+                                  <p class="postDate">' . $fecha . '</p>
+                              </div>
+                          </div>
+                          <p class="postContent">' . htmlspecialchars($row["contingut"]) . '</p>
+                          ' . $fotoPublicacion . '
+                          <div class="postActions">
+                              <button class="likeButton" disabled><i class="fa fa-heart"></i> ' . $row["likesPubli"] . '</button>
+                          </div>
+                      </div>';
+              }
+          } else {
+              echo '<p class="no-posts-message">Este usuario no ha realizado publicaciones.</p>';
+          }
+      } catch (PDOException $e) {
+          echo '<p class="error-message">Error al cargar las publicaciones: ' . $e->getMessage() . '</p>';
+      }
+      
+      // Cerrar la conexión a la base de datos al final del archivo
+      $db = null;
+      ?>
     </main>
     <footer>
         <img src="../assets/pistachad.png" alt="Pistachad Logo" />

@@ -137,6 +137,158 @@ main {
     margin: 0.5rem 0;
 }
 
+.socialPost {
+    background-color: rgba(249, 214, 172, 0.8);
+    padding: 1.5rem;
+    border-radius: 20px;
+    width: 80%;
+    border: solid 2px #75906b;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    margin-bottom: 2rem;
+}
+
+.socialPost:hover {
+    transform: scale(1.02);
+}
+
+/* POST HEADER */
+.postHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    
+}
+
+/* PROFILE PICTURE */
+.profilePic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+.profilePic:hover {
+    transform: scale(1.05);
+}
+
+/* USER NAME */
+.userName {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #75906b;
+}
+
+/* POST IMAGES */
+.socialPost img {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    max-width: 100%;
+    margin-top: 1rem;
+}
+.socialPost img:hover {
+    transform: scale(1.05);
+}
+
+/* POST CONTAINER */
+.postContainer {
+    border: solid 2px #75906b;
+    background-color: rgba(249, 214, 172, 0.8);
+    padding: 2rem;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.postContainer:hover {
+    transform: scale(1.02);
+}
+
+.postContainer textarea, .postContainer input {
+    width: 100%;
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+    border: 1px solid #75906b;
+    border-radius: 10px;
+    transition: border-color 0.3s;
+}
+.postContainer textarea:focus, .postContainer input:focus {
+    border-color: #90b083;
+    outline: none;
+}
+
+.postContainer button {
+    background-color: #75906b;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.postContainer button:hover {
+    background-color: #90b083;
+    transform: scale(1.05);
+}
+/* Añade esto a tu archivo home.css o perfil.css */
+
+.likeButton {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.likeButton:hover {
+    background-color: #f8f8f8;
+}
+
+.likeButton.active {
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.likeButton.active i {
+    color: #e74c3c;
+}
+
+.postActions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.postDate {
+    font-size: 0.8em;
+    color: #777;
+    margin: 0;
+}
+
+/* IMAGES */
+main img {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    max-width: 100%;
+    width: 500px;
+    height: 300px;
+    object-fit: cover;
+}
+main img:hover {
+    transform: scale(1.05);
+}
+
 /* FOOTER */
 footer {
     background-color: rgba(249, 214, 172, 0.9);
@@ -170,3 +322,4 @@ footer p {
     color: gray;
     font-size: 0.9rem;
 }
+

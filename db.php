@@ -10,7 +10,6 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC // Modo de fetch por defecto
     ]);
 
-
 } catch (PDOException $e) {
     echo 'Error amb la BDs: ' . $e->getMessage() . '<br>';
 }

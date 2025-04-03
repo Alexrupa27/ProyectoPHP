@@ -39,7 +39,6 @@
         <img src="./img/logo.png" alt="Background de la web" class="pistaBackground">
         <p class="titulo">PISTACHAD</p>
     </header>
-
 <?php
 require './db.php';
 session_start();
@@ -50,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     try {
-        $stmt = $db->prepare("SELECT idUser, username, passHash, active FROM usuari WHERE mail = ?");
+        $stmt = $db->prepare("SELECT idUser, username, passHash, active, mail FROM usuari WHERE mail = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
